@@ -3,13 +3,14 @@ import json
 import subprocess
 import urllib.request
 
-GEMINI_KEY = os.environ["GEMINI_API_KEY"]
-TOKEN = os.environ["GITHUB_TOKEN"]
-REPO = os.environ["REPO"]
-PR_NUMBER = os.environ["PR_NUMBER"]
-BASE_SHA = os.environ["BASE_SHA"]
-HEAD_SHA = os.environ["HEAD_SHA"]
-
+env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          
 API = "https://api.github.com"
 
 
